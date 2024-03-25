@@ -1,1 +1,31 @@
-"안녕하세요"
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 10
+
+int compare(const void *a, const void *b)
+{
+    return (*(int *)b - *(int *)a);
+}
+
+int main()
+{
+    int num;
+    int array[SIZE];
+
+    scanf("%i", &num);
+
+    for(int i = 0; i < num; i++)
+    {
+        for(int j = 0; j < SIZE; j++)
+        {
+            scanf("%i", &array[j]);
+        }
+
+        qsort(array, SIZE, sizeof(int), compare);
+
+        printf("%i\n", array[2]);
+    }
+
+    return 0;
+}
