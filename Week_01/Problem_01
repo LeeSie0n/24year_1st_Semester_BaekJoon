@@ -18,9 +18,7 @@ int main()
     for(int i = 0; i < num; i++)
     {
         for(int j = 0; j < SIZE; j++)
-        {
             scanf("%i", &array[j]);
-        }
 
         qsort(array, SIZE, sizeof(int), compare);
 
