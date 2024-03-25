@@ -1,1 +1,29 @@
-안녕
+# I wanted my seniors to have a hard time, so I wrote code in Ruby.
+
+# Read the number of coin types and the target amount in one line
+coin_types, target_amount = gets.split.map(&:to_i)
+# Read the values of the coins
+coin_values = Array.new(coin_types) { gets.to_i }
+
+# Initialize the DP array: all values are set to 0, with a length of target_amount+1
+# dp[i] stores the number of ways to make the amount i
+dp = Array.new(target_amount + 1, 0)
+# There is 1 way to make 0 amount, which is using no coins
+dp[0] = 1
+
+# Iterate over each coin
+coin_values.each do |coin|
+  # For each amount from the value of the current coin to the target amount
+  (coin..target_amount).each do |amount|
+    # If it's possible to make the current amount using the current coin,
+    # add the number of ways to make (current amount - coin value) to the current amount's ways
+    dp[amount] += dp[amount - coin]
+  end
+end
+
+# Output the number of ways to make the target amount
+puts dp[target_amount]
+
+# Review
+# 요즘 루비로 코드를 공부하고 있었는데, 선배들이 코드를 리뷰해준다는 소식을 듣고 Ruby로 코드를 작성하였습니다 !
+# 화이팅 !!
