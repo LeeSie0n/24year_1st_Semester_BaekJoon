@@ -1,44 +1,49 @@
 # I wanted my seniors to have a hard time, so I wrote code in Ruby.
 
-# Initialize an empty string to represent the editor content and a cursor position at the end of the string
-editor = ""
-cursor_position = 0
+# Initialize two stacks to represent the text to the left and right of the cursor
+left_stack = []
+right_stack = []
 
-# Read the initial string for the editor from the user input
+# Read the initial string from standard input and convert it into a stack of characters
+# This stack represents all characters to the left of the cursor initially
 initial_string = gets.chomp
-editor << initial_string
-cursor_position = editor.length
+left_stack = initial_string.chars
 
-# Read the number of commands to be executed
+# Read the number of commands that will be executed
 number_of_commands = gets.to_i
 
-# Iterate over each command received
+# Execute each command one by one
 number_of_commands.times do
+  # Split the command into parts to analyze it
+  # The first part is the command type (L, D, B, P) and the second part is the character to add in case of P command
   command = gets.split
+  
+  # Determine the action based on the first part of the command
   case command[0]
   when "L"
-    # Move the cursor to the left unless it is at the beginning of the string
-    cursor_position -= 1 unless cursor_position == 0
+    # Move cursor left: move the top character from the left stack to the right stack, unless the left stack is empty
+    # This simulates moving the cursor one position to the left
+    right_stack.push(left_stack.pop) unless left_stack.empty?
   when "D"
-    # Move the cursor to the right unless it is at the end of the string
-    cursor_position += 1 unless cursor_position == editor.length
+    # Move cursor right: move the top character from the right stack to the left stack, unless the right stack is empty
+    # This simulates moving the cursor one position to the right
+    left_stack.push(right_stack.pop) unless right_stack.empty?
   when "B"
-    # Delete the character to the left of the cursor unless the cursor is at the beginning
-    # This involves removing the character from the string and adjusting the cursor position
-    if cursor_position > 0
-      editor.slice!(cursor_position - 1)
-      cursor_position -= 1
-    end
+    # Delete the character left of the cursor: pop the top character from the left stack, unless it is empty
+    # This simulates deleting a character just left of the cursor
+    left_stack.pop unless left_stack.empty?
   when "P"
-    # Insert a new character to the left of the cursor position
-    # This requires modifying the string to include the new character and adjusting the cursor position
-    editor.insert(cursor_position, command[1])
-    cursor_position += 1
+    # Add a new character to the left of the cursor: push the given character onto the left stack
+    # This simulates typing a character at the cursor's position
+    left_stack.push(command[1])
   end
 end
 
-# Output the final state of the editor content after applying all commands
-puts editor
+# Combine the left and right stacks to form the final text
+# The right stack is reversed to maintain the correct order of text, as the stack reverses the order of elements
+editor = left_stack + right_stack.reverse
+# Output the final text by joining the characters together
+puts editor.join
 
 # Review
 # 요즘 루비로 코드를 공부하고 있었는데, 선배들이 코드를 리뷰해준다는 소식을 듣고 Ruby로 코드를 작성하였습니다 !
