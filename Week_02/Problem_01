@@ -1,3 +1,5 @@
+# I wanted my seniors to have a hard time, so I wrote code in Ruby.
+
 # Initialize an empty string to represent the editor content and a cursor position at the end of the string
 editor = ""
 cursor_position = 0
