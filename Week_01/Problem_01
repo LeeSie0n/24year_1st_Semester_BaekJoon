@@ -1,29 +1,41 @@
-#include <stdio.h>
-#include <stdlib.h>
+# I wanted my seniors to have a hard time, so I wrote code in Ruby.
 
-#define SIZE 10
+# Define a constant for the size of the array
+SIZE = 10
 
-int compare(const void *a, const void *b)
-{
-    return (*(int *)b - *(int *)a);
-}
+# Define a compare method to be used for sorting the array in descending order.
+# This method takes two arguments, a and b, and compares them using the spaceship operator.
+# It returns 1 if a < b, 0 if a == b, and -1 if a > b, which is reversed for descending order.
+def compare(a, b)
+  b <=> a
+end
 
-int main()
-{
-    int num;
-    int array[SIZE];
+# Read an integer from standard input and assign it to num.
+# This represents the number of times the loop will execute, each time processing a new array of integers.
+num = gets.to_i
 
-    scanf("%i", &num);
+# Execute the block num times.
+# Each iteration represents a new set of SIZE integers to be processed.
+num.times do
+  # Initialize an array with SIZE elements.
+  array = Array.new(SIZE)
 
-    for(int i = 0; i < num; i++)
-    {
-        for(int j = 0; j < SIZE; j++)
-            scanf("%i", &array[j]);
+  # Fill the array with integers read from standard input.
+  # Loop SIZE times, reading an integer each time and assigning it to the current position in the array.
+  (0...SIZE).each do |j|
+    array[j] = gets.to_i
+  end
 
-        qsort(array, SIZE, sizeof(int), compare);
+  # Sort the array in descending order.
+  # The sort! method is used to sort the array in place, altering the original array.
+  # The custom compare method is passed as a block to define the sorting behavior (descending order).
+  array.sort! { |a, b| compare(a, b) }
 
-        printf("%i\n", array[2]);
-    }
+  # Output the third largest number in the array.
+  # Since the array is sorted in descending order, the third element (index 2) is the third largest.
+  puts array[2]
+end
 
-    return 0;
-}
+# Review
+# 요즘 루비로 코드를 공부하고 있었는데, 선배들이 코드를 리뷰해준다는 소식을 듣고 Ruby로 코드를 작성하였습니다 !
+# 화이팅 !!
