@@ -1,1 +1,39 @@
-...
+# Initialize an empty string to represent the editor content and a cursor position at the end of the string
+editor = ""
+cursor_position = 0
+
+# Read the initial string for the editor from the user input
+initial_string = gets.chomp
+editor << initial_string
+cursor_position = editor.length
+
+# Read the number of commands to be executed
+number_of_commands = gets.to_i
+
+# Iterate over each command received
+number_of_commands.times do
+  command = gets.split
+  case command[0]
+  when "L"
+    # Move the cursor to the left unless it is at the beginning of the string
+    cursor_position -= 1 unless cursor_position == 0
+  when "D"
+    # Move the cursor to the right unless it is at the end of the string
+    cursor_position += 1 unless cursor_position == editor.length
+  when "B"
+    # Delete the character to the left of the cursor unless the cursor is at the beginning
+    # This involves removing the character from the string and adjusting the cursor position
+    if cursor_position > 0
+      editor.slice!(cursor_position - 1)
+      cursor_position -= 1
+    end
+  when "P"
+    # Insert a new character to the left of the cursor position
+    # This requires modifying the string to include the new character and adjusting the cursor position
+    editor.insert(cursor_position, command[1])
+    cursor_position += 1
+  end
+end
+
+# Output the final state of the editor content after applying all commands
+puts editor
