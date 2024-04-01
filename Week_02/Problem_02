@@ -23,3 +23,12 @@ end
 string = gets.chomp
 puts min_swaps_for_continuous_a(string)
 
+# Combine the left and right stacks to form the final text
+# The right stack is reversed to maintain the correct order of text, as the stack reverses the order of elements
+editor = left_stack + right_stack.reverse
+# Output the final text by joining the characters together
+puts editor.join
+
+# Review
+# 요즘 루비로 코드를 공부하고 있었는데, 선배들이 코드를 리뷰해준다는 소식을 듣고 Ruby로 코드를 작성하였습니다 !
+# 화이팅 !!
