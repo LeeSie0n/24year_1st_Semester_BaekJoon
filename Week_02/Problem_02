@@ -1,4 +1,4 @@
-...
+# I wanted my seniors to have a hard time, so I wrote code in Ruby.
 
 def min_swaps_for_continuous_a(string)
   return 0 if string.length <= 1
