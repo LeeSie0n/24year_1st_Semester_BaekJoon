@@ -1,1 +1,25 @@
 ...
+
+def min_swaps_for_continuous_a(string)
+  return 0 if string.length <= 1
+
+  total_a = string.count('a')
+  extended_string = string * 2
+
+  min_swaps = total_a
+  current_a_count = extended_string[0, total_a].count('a')
+  
+  min_swaps = [min_swaps, total_a - current_a_count].min
+
+  (1...string.length).each do |i|
+    current_a_count -= 1 if extended_string[i-1] == 'a'
+    current_a_count += 1 if extended_string[i + total_a - 1] == 'a'
+    min_swaps = [min_swaps, total_a - current_a_count].min
+  end
+
+  min_swaps
+end
+
+string = gets.chomp
+puts min_swaps_for_continuous_a(string)
+
