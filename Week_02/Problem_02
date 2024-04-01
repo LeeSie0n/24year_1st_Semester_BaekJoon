@@ -1,26 +1,43 @@
 # I wanted my seniors to have a hard time, so I wrote code in Ruby.
 
+# Define a method called min_swaps_for_continuous_a which takes a string as an argument.
+# This method calculates the minimum number of swaps required to make all 'a' characters in the string contiguous.
 def min_swaps_for_continuous_a(string)
+  # Return 0 immediately if the string's length is 1 or less since no swaps are needed in such cases.
   return 0 if string.length <= 1
 
+  # Count the total number of 'a' characters in the string. This will be used to determine the window size for checking contiguous 'a's.
   total_a = string.count('a')
+
+  # Create an extended_string by duplicating the original string. This helps in handling wrap-around cases where 'a's might be split at the end and start of the string.
   extended_string = string * 2
 
+  # Initialize min_swaps with total_a. This variable will hold the minimum number of swaps required. It's initialized with the total number of 'a's as a worst-case scenario.
   min_swaps = total_a
+
+  # Count the number of 'a' characters in the first window of the extended string that has the same length as the total number of 'a's in the original string.
   current_a_count = extended_string[0, total_a].count('a')
   
+  # Update min_swaps to be the minimum between itself and the number of swaps needed to make the current window all 'a's. This is calculated as total_a - current_a_count.
   min_swaps = [min_swaps, total_a - current_a_count].min
 
+  # Iterate through each character in the original string to move the window one character at a time and recalculate the number of swaps needed.
   (1...string.length).each do |i|
+    # If the character leaving the window is 'a', decrease the current_a_count.
     current_a_count -= 1 if extended_string[i-1] == 'a'
+    # If the new character entering the window is 'a', increase the current_a_count.
     current_a_count += 1 if extended_string[i + total_a - 1] == 'a'
+    # Update min_swaps to be the minimum between itself and the number of swaps needed to make the current window all 'a's.
     min_swaps = [min_swaps, total_a - current_a_count].min
   end
 
+  # Return the minimum number of swaps found.
   min_swaps
 end
 
+# Read a string from the standard input, removing the trailing newline character.
 string = gets.chomp
+# Print the result of calling min_swaps_for_continuous_a with the input string to the standard output.
 puts min_swaps_for_continuous_a(string)
 
 # Combine the left and right stacks to form the final text
