@@ -1,6 +1,35 @@
 # I wanted my seniors to have a hard time, so I wrote code in Ruby.
 
+# Read the input string from standard input.
+string = gets.chomp
 
+# Initialize counters for the number of groups of '0's and '1's respectively.
+count_0 = 0
+count_1 = 0
+
+# Determine the initial group based on the first character of the string.
+# If the first character is '0', increment the counter for '0' groups; otherwise, increment the counter for '1' groups.
+if string[0] == '0'
+  count_0 += 1
+else
+  count_1 += 1
+end
+
+# Iterate through the string starting from the second character to count the number of '0' and '1' groups.
+# A new group is identified when the current character is different from the previous one.
+(1...string.length).each do |i|
+  if string[i] != string[i-1]
+    # If the current character is '0' and it is different from the previous character,
+    # it signifies the start of a new '0' group, so we increment the '0' group counter.
+    # Otherwise, it signifies the start of a new '1' group, so we increment the '1' group counter.
+    string[i] == '0' ? count_0 += 1 : count_1 += 1
+  end
+end
+
+# The minimum number of flips required to make all characters in the string the same
+# is the smaller of the two group counts. This is because flipping the smaller number
+# of groups will result in a string of uniform characters, either all '0's or all '1's.
+puts [count_0, count_1].min
 
 # Review
 # 요즘 루비로 코드를 공부하고 있었는데, 선배들이 코드를 리뷰해준다는 소식을 듣고 Ruby로 코드를 작성하였습니다 !
