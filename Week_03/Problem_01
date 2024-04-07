@@ -1,0 +1,22 @@
+# I wanted my seniors to have a hard time, so I wrote code in Ruby.
+
+# Reads an integer from standard input and assigns it to the variable 'number'.
+number = gets.to_i
+
+# Initializes a 2-dimensional array (matrix) of integers. The outer array has 'number' of elements (rows).
+# Each row is created by reading a line from standard input, splitting it into an array of strings based on spaces,
+# and then converting each string in the array into an integer. This process repeats 'number' times to fill the matrix.
+matrix = Array.new(number) { gets.split.map(&:to_i) }
+
+# Flattens the 2-dimensional matrix into a 1-dimensional array and sorts it in descending order.
+# 'flatten' converts the 2-dimensional array into a 1-dimensional array by merging all inner arrays.
+# 'sort' then arranges the elements of this array in ascending order, and 'reverse' changes that order to descending.
+sorted_numbers = matrix.flatten.sort.reverse
+
+# Outputs the element at the position 'number - 1' in the sorted array. Since the array is 0-indexed,
+# this operation effectively prints the Nth largest number in the matrix, where N is the value of 'number'.
+puts sorted_numbers[number-1]
+
+# Review
+# 요즘 루비로 코드를 공부하고 있었는데, 선배들이 코드를 리뷰해준다는 소식을 듣고 Ruby로 코드를 작성하였습니다 !
+# 화이팅 !!
