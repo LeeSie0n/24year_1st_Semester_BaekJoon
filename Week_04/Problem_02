@@ -1,6 +1,30 @@
+# BaekJoon 1152
+
 # I wanted my seniors to have a hard time, so I wrote code in Ruby.
 
+# Reads a line from the input and removes the trailing newline character. 
+# `gets.chomp` reads a string input from the user, and `chomp` removes the newline character at the end.
+arr = gets.chomp
 
+# Initializes `count` to 0. This variable will keep track of the number of words found in the input string.
+count = 0
+
+# If the first character of the input string is not a space, increment `count` by 1.
+# This is because the presence of a non-space character at the beginning signifies the start of a word.
+count = 1 if arr[0] != ' '
+
+# Iterates through the characters of the input string starting from the second character (index 1) up to the last character.
+# The range `(1...arr.length)` ensures we start checking from the second character and go through to the end of the string.
+(1...arr.length).each do |i|
+  # Increments `count` by 1 if the current character is not a space and the previous character is a space.
+  # This condition checks for the start of a new word, assuming words are separated by spaces.
+  # It specifically looks for a pattern where a word starts immediately after a space, indicating a new word.
+  count += 1 if arr[i - 1] == ' ' && arr[i] != ' '
+end
+
+# Outputs the total count of words found in the input string.
+# This is the final result, showing how many words were counted based on the space separation.
+puts count
 
 # Review
 # 요즘 루비로 코드를 공부하고 있었는데, 선배들이 코드를 리뷰해준다는 소식을 듣고 Ruby로 코드를 작성하였습니다 !
