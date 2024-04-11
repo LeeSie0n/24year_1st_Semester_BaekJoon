@@ -1,6 +1,33 @@
 # I wanted my seniors to have a hard time, so I wrote code in Ruby.
 
+# Reads a line from input, splits it by whitespace, and converts each split part into an integer.
+# This line is expected to provide two integers: `n`, the number of cards, and `m`, the target sum.
+n, m = gets.split.map(&:to_i)
 
+# Reads another line from input, splits it by whitespace, and converts each split part into an integer.
+# These integers represent the values on the individual cards.
+cards = gets.split.map(&:to_i)
+
+# Initialize `max_sum` to 0. This variable will hold the maximum sum of any three cards
+# that is less than or equal to `m`.
+max_sum = 0
+
+# Generates all possible combinations of three cards from the `cards` array. This is done by calling
+# the `combination` method with the argument 3, which means we are looking for all unique sets of 3 cards.
+# Each generated combination is an array of three integers.
+cards.combination(3).each do |combination|
+  # Calculates the sum of the three cards in the current combination.
+  sum = combination.sum
+  
+  # Updates `max_sum` if the sum of the current combination is more than the current `max_sum`
+  # and does not exceed `m`. This ensures `max_sum` holds the highest possible sum of any three cards
+  # that is still less than or equal to `m`.
+  max_sum = sum if sum <= m && sum > max_sum
+end
+
+# Outputs the maximum sum found. This is the closest sum to `m` that can be made with any three cards,
+# without exceeding `m`.
+puts max_sum
 
 # Review
 # 요즘 루비로 코드를 공부하고 있었는데, 선배들이 코드를 리뷰해준다는 소식을 듣고 Ruby로 코드를 작성하였습니다 !
