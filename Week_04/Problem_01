@@ -1,3 +1,5 @@
+# BaekJoon 2798
+
 # I wanted my seniors to have a hard time, so I wrote code in Ruby.
 
 # Reads a line from input, splits it by whitespace, and converts each split part into an integer.
